@@ -53,7 +53,7 @@ $Poster-&gt;update();
 </pre>
 <p>All the attributes can be updated this way.</p>
 <p>&nbsp;</p>
-<h3>Other Attributes</h3>
+<h3>Attributes</h3>
 <h4>Title</h4>
 <p>We have already seen this method. It sets the post's title. No HTML is allowed here, and is stripped out.</p>
 <pre>$Poster-&gt;set_title( &quot;New Post&quot; ); 
