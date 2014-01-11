@@ -2,7 +2,7 @@
 
 This is a PHP Class which enables you to create/manage/update Wordpress posts and pages.
 
-This require Wordpress to run.
+This require Wordpress 2.9+ to run.
 
 <h3>Usage</h3>
 Include the <code>class.postcontroller.php</code> file in your Wordpress plugin/theme.
