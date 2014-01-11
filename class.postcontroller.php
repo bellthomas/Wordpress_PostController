@@ -245,7 +245,13 @@ class PostController {
 		return 'Use the PrettyPrint function to return the contents of this Object. E.g;<pre>$my_post->PrettyPrint();</pre>';
     } 
 	
-	public function PrettyPrint(){
+	public function PrettyPrint($data){
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>"; 
+	}
+	
+	public function PrettyPrintAll(){
 		echo "<pre>";
 		print_r($this);
 		echo "</pre>"; 
@@ -274,7 +280,7 @@ $Poster->update();
 
 //$Poster->create();
 
-//$Poster->PrettyPrint();
+//$Poster->PrettyPrintAll();
 
 $Poster->get_var('slug');
 
