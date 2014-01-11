@@ -12,6 +12,7 @@ You now have access to the class and its functions. Instantiate the class.
 $Poster = new PostController;
 </pre>
 <p>This class has two major functions; Creating and Updating posts. We'll start with creating.</p>
+<p>See <code>index.php</code> for working examples.</p>
 <h3>Post Creation</h3>
 <p>The minimum requisite for creating a post is having the title set. You can do this by using the following code;</p>
 <pre>$Poster-&gt;set_title( &quot;New Post&quot; ); 
