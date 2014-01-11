@@ -42,7 +42,7 @@ $Poster-&gt;PrettyPrint($error);</pre>
 <h4>&nbsp;</h4>
 <h4>Update</h4>
 <p>Once a post has been found, you can assign it new attributes.</p>
-<p>Once the arrtibutes have been set, simply call the update method.</p>
+<p>Once the attributes have been set, simply call the update method.</p>
 <pre>$Poster-&gt;update();
 </pre>
 <p>For example, if you wish to change the title of post 1 (ID = 1), you would use the following code.</p>
