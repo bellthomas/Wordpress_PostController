@@ -240,7 +240,7 @@ class PostController {
 	}
 	
 	public function __toString()  {  
-		return 'Use the PrettyPrint function to return the contents of this Object. E.g;<pre>$my_post->PrettyPrint();</pre>';
+		return 'Use the PrettyPrint function to return the contents of this Object. E.g;<pre>$my_post->PrettyPrintAll();</pre>';
     } 
 	
 	public function PrettyPrint($data){
