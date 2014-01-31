@@ -20,7 +20,7 @@ class PostController {
 	public $PC_category;
 	public $PC_template;
 	public $PC_slug;
-	public $PC_auth_id = "1";
+	public $PC_auth_id;
 	public $PC_status = "publish";
 	
 	// Variables for Post Updating
@@ -29,11 +29,11 @@ class PostController {
 	public $PC_current_post_permalink;
 	
 	// Error Array
-	public $errors;
+	public $PC_errors;
 	
 	// Creation functions
 	public function create() {
-		if(isset($PC_title) ) {
+		if(isset($this->PC_title) ) {
 			if ($this->PC_type == 'page') 
 				$post = get_page_by_title( $this->PC_title, 'OBJECT', $this->PC_type );
 			else 
@@ -41,7 +41,6 @@ class PostController {
 				
 			$post_data = array(
 				'post_title'    => wp_strip_all_tags($this->PC_title),
-				//'post_title'    => $this->PC_title,
 				'post_name'     => $this->PC_slug,
 				'post_content'  => $this->PC_content,
 				'post_status'   => $this->PC_status,
@@ -53,11 +52,14 @@ class PostController {
 			if(!isset($post)){
 				$this->PC_current_post_id = wp_insert_post( $post_data, $error_obj );
 				$this->PC_current_post = get_post((integer)$this->PC_current_post_id, 'OBJECT');
+				$this->PC_current_post_permalink = get_permalink((integer)$this->PC_current_post_id);
 				return $error_obj;
 			}
-			else
+			else {
 				$this->update();
-				return 'That page already exists. Try updating instead.';
+				$this->errors[] = 'That page already exists. Try updating instead. Control passed to the update() function.';
+				return FALSE;
+			}
 		} 
 		else {
 			$this->errors[] = 'Title has not been set.';
@@ -65,26 +67,37 @@ class PostController {
 		}
 	}
 	
+	// SET POST'S TITLE	
 	public function set_title($name){
 		$this->PC_title = $name;	
 		return $this->PC_title;
 	}
 	
+	// SET POST'S TYPE	
 	public function set_type($type){
 		$this->PC_type = $type;	
 		return $this->PC_type;
 	}
 	
+	// SET POST'S CONTENT	
 	public function set_content($content){
 		$this->PC_content = $content;	
 		return $this->PC_content;
 	}
 	
+	// SET POST'S AUTHOR ID	
 	public function set_author_id($auth_id){
 		$this->PC_auth_id = $auth_id;	
 		return $this->PC_auth_id;
 	}
 	
+	// SET POST'S STATE	
+	public function set_post_state($content){
+		$this->PC_status = $content;
+		return $this->PC_status;
+	}
+	
+	// SET POST SLUG
 	public function set_post_slug($slug){
 		$args = array('name' => $slug);
 		$posts_query = get_posts( $args );
@@ -92,24 +105,25 @@ class PostController {
 			$this->PC_slug = $slug;	
 			return $this->PC_slug;	
 		}
-		else
+		else {
 			$this->errors[] = 'Slug already in use.';
 			return FALSE;
+		}
 	}
 	
+	// SET PAGE TEMPLATE
 	public function set_page_template($content){
-		if ($this->PC_type == "page")
+		if ($this->PC_type == "page") {
 			$this->PC_template = $content;
-		else
+			return $this->PC_template;
+		}
+		else {
 			$this->errors[] = 'You can only use template for pages.';
-		return $this->PC_template;
+			return FALSE;
+		}
 	}
 	
-	public function set_post_state($content){
-		$this->PC_status = $content;
-		return $this->PC_status;
-	}
-	
+	// ADD CATEGORY IDs TO THE CATEGORIES ARRAY
 	public function add_category($IDs){
 		if(is_array($IDs)) {
 			foreach ($IDs as $id) {
@@ -148,12 +162,13 @@ class PostController {
 					$this->PC_current_post = get_post((integer)$id, 'OBJECT');
 					$this->PC_current_post_id = (integer)$id;
 					$this->PC_current_post_permalink = get_permalink((integer)$id);
-					$this->errors[] = 'No post found with that title.';
 					return TRUE;
 				} else {
+					$this->errors[] = 'No post found with that title.';
 					return FALSE;
 				}
 			break;
+			
 			case 'slug' :
 				$args = array('name' => $data, 'max_num_posts' => 1);
 				$posts_query = get_posts( $args );
@@ -174,7 +189,7 @@ class PostController {
 			break;
 			
 			default:
-				$this->errors[] = 'No post found with that slug.';
+				$this->errors[] = 'No post found.';
 				return FALSE;
 			break;
 		}
@@ -254,6 +269,5 @@ class PostController {
 		print_r($this);
 		echo "</pre>"; 
 	}
-
 }
 ?>
