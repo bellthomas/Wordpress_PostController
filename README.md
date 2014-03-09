@@ -74,7 +74,7 @@ $Poster-&gt;update();
 <pre>$Poster-&gt;set_post_slug( &quot;new_slug&quot; ); 
 </pre>
 <h4>Categories</h4>
-<p>This is an integer or array of integers. This function is <b>non destructive</b>, meaning it will preserve any categories already set (see 'Multiple Function Example'). The integers correspond to Category ID's, which will unique to each Wordpress site. NB Category with ID 1 is created automatically and can't be deleted.</p>
+<p>This is an integer or array of integers. This function is <b>non destructive</b>, meaning it will preserve any categories already set (see 'Multiple Function Example'). The integers correspond to Category ID's, which will be unique to each Wordpress site. NB Category with ID 1 is created automatically and can't be deleted.</p>
 <pre>$Poster-&gt;add_category( array( 1 , 2 ) );    // Adds post to both categories 1 and 2.
 $Poster-&gt;add_category( 1 );    // Adds post to category 1.
 // Multiple Function Example
