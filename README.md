@@ -68,9 +68,19 @@ $Poster-&gt;update();
 </pre><h4>Author</h4>
 <p>This sets the post's author. Simply specify the author ID of the new author. This must be an integer.</p>
 <pre>$Poster-&gt;set_author_id( 12 ); 
-</pre><h4>Slug / 'Name'</h4>
+</pre>
+<h4>Slug / 'Name'</h4>
 <p>This is the custom url path of the post (if enabled). <strong>Take care</strong> with this, as if the slug is already in use, it may cause some errors. I have included validation to try and avoid this at all costs though. No special characters or html allowed.</p>
 <pre>$Poster-&gt;set_post_slug( &quot;new_slug&quot; ); 
+</pre>
+<h4>Categories</h4>
+<p>This is an integer or array of integers. This function is <b>non destructive</b>, meaning it will preserve any categories already set (see 'Multiple Function Example'). The integers correspond to Category ID's, which will unique to each Wordpress site. NB Category with ID 1 is created automatically and can't be deleted.</p>
+<pre>$Poster-&gt;add_category( array( 1 , 2 ) );    // Adds post to both categories 1 and 2.
+$Poster-&gt;add_category( 1 );    // Adds post to category 1.
+// Multiple Function Example
+$Poster-&gt;add_category( 1 );
+$Poster-&gt;add_category( 2 );
+// This adds the post to both category 1 and 2.
 </pre>
 <h4>Template (Pages Only)</h4>
 <p>This method alows you to set your page's template (must be a page). If applied to a different post type it will be ignored, and an error will be added to the errors array. The format of the input will be <code>'php_template_name.php'</code> and will be unique to each theme.</p>
