@@ -79,7 +79,13 @@ class PostController {
 		    {
 					set_post_thumbnail( $post_id, $attach_id );
 		    }
+				else {
+					$errors[] = 'No attachment found with that ID.';
+				}
 
+			}
+			else {
+				$errors[] = 'No post found.';
 			}
 			return($errors);
 	}
@@ -104,6 +110,9 @@ class PostController {
 		    {
 		        update_post_meta( $post_id, $field_name, $value );
 		    }
+			}
+			else {
+				$errors[] = 'No post found.';
 			}
 
 			return($errors);
